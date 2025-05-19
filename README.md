@@ -9,6 +9,8 @@ Este proyecto inicia la construcción de un backend con [Cube.js](https://cube.d
    npm install
    ```
 2. Copia `.env.example` a `.env` y ajusta los valores de conexión a tu base de datos SQL Server.
+   Si no creas el archivo `.env`, el servidor intentará utilizar `.env.example` de forma automática.
+   Esto facilita pruebas en entornos como **Replit**, aunque se recomienda definir tus propias variables de entorno para producción.
 3. Inicia el servidor:
    ```bash
    npm start
