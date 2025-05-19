@@ -1,0 +1,403 @@
+{
+  "database": "Serinsa",
+  "description": "Sistema de gestión para intermediación de seguros, donde instituciones de microfinanzas (IMF) registran y venden pólizas a sus clientes finales.",
+  "tables": {
+    "pge_dep_departamentos": {
+      "description": "Departamentos geográficos del país.",
+      "columns": {
+        "dep_codigo": "Identificador único del departamento.",
+        "dep_codpai": "Código del país al que pertenece el departamento (referencia a 'pge_pai_paises').",
+        "dep_nombre": "Nombre del departamento.",
+        "dep_codusr_registra": "Usuario que registró el departamento.",
+        "dep_ip_registra": "IP desde la que se registró.",
+        "dep_fecha_registra": "Fecha y hora de registro."
+      }
+    },
+    "pge_dpr_det_prd": {
+      "description": "Planes de productos de seguros, asocian un producto específico con características demográficas y condiciones.",
+      "columns": {
+        "dpr_codigo": "Identificador del plan.",
+        "dpr_codprd": "Código del producto base asociado (referencia a 'pge_prd_productos').",
+        "dpr_nombre": "Nombre del plan.",
+        "dpr_codpai": "País de aplicación.",
+        "dpr_codgen": "Código del género al que aplica (referencia a 'pge_gen_genero').",
+        "dpr_edad_minima": "Edad mínima para ser elegible.",
+        "dpr_edad_maxima": "Edad máxima para ser elegible.",
+        "dpr_prima": "Monto de la prima del seguro.",
+        "dpr_estado": "Estado del plan (A=Activo, I=Inactivo).",
+        "dpr_codusr_registra": "Usuario que registró.",
+        "dpr_ip_registra": "IP del registro.",
+        "dpr_fecha_registra": "Fecha de registro.",
+        "estado": "Descripción del estado.",
+        "ventana": "Referencia a la interfaz o ventana de mantenimiento.",
+        "ventanasd": "Referencia a ventana relacionada a coberturas de saldo deudor."
+      }
+    },
+    "pge_etn_etnia": {
+      "description": "Etnias registradas para la población.",
+      "columns": {
+        "etn_codigo": "Identificador de etnia.",
+        "etn_nombre": "Nombre de la etnia.",
+        "etn_codusr_registra": "Usuario que registró.",
+        "etn_ip_registra": "IP del registro.",
+        "etn_fecha_registra": "Fecha de registro."
+      }
+    },
+    "pge_gen_genero": {
+      "description": "Género o sexo de las personas.",
+      "columns": {
+        "gen_codigo": "Identificador de género.",
+        "gen_nombre": "Nombre del género (Masculino, Femenino).",
+        "gen_codusr_registra": "Usuario responsable.",
+        "gen_ip_registra": "IP de registro.",
+        "gen_fecha_registra": "Fecha de registro."
+      }
+    },
+    "pge_imf_imfs": {
+      "description": "Instituciones de Microfinanzas participantes. Venden y gestionan pólizas de seguros a los clientes finales.",
+      "columns": {
+        "imf_codigo": "Identificador de la IMF.",
+        "imf_codred": "Red de microfinanzas a la que pertenece (referencia a 'pge_red_redes').",
+        "imf_nombre": "Nombre completo de la IMF.",
+        "imf_siglas": "Siglas de la IMF.",
+        "imf_contacto": "Persona de contacto en la IMF.",
+        "imf_sector": "Sector al que pertenece.",
+        "imf_clasificacion": "Clasificación interna.",
+        "imf_empleados": "Cantidad de empleados.",
+        "imf_clientes": "Cantidad de clientes.",
+        "imf_ruta_logo": "Ruta o URL del logo corporativo.",
+        "imf_nombre_firma": "Nombre para firma de documentos.",
+        "imf_estado": "Estado (A=Activo, I=Inactivo).",
+        "imf_codusr_registra": "Usuario que registró.",
+        "imf_ip_registra": "IP de registro.",
+        "imf_fecha_registra": "Fecha y hora de registro.",
+        "ventana*": "Referencias a ventanas de interfaz para mantenimiento de IMF y relacionados."
+      }
+    },
+    "pge_mun_municipios": {
+      "description": "Municipios dentro de cada departamento.",
+      "columns": {
+        "mun_codigo": "Identificador del municipio.",
+        "mun_coddep": "Código del departamento (referencia a 'pge_dep_departamentos').",
+        "mun_nombre": "Nombre del municipio.",
+        "mun_codusr_registra": "Usuario.",
+        "mun_ip_registra": "IP.",
+        "mun_fecha_registra": "Fecha de registro."
+      }
+    },
+    "pge_pai_paises": {
+      "description": "Países registrados en el sistema.",
+      "columns": {
+        "pai_codigo": "Identificador de país.",
+        "pai_nombre": "Nombre del país.",
+        "pai_gentilicio": "Gentilicio asociado.",
+        "pai_codusr_registra": "Usuario registro.",
+        "pai_ip_registra": "IP.",
+        "pai_fecha_registra": "Fecha de registro."
+      }
+    },
+    "pge_prd_productos": {
+      "description": "Productos de seguros ofrecidos, con clasificación por ramo.",
+      "columns": {
+        "prd_codigo": "Código único del producto.",
+        "prd_codram": "Código de ramo de seguro (referencia a 'pge_ram_ramas').",
+        "prd_nombre": "Nombre del producto.",
+        "prd_nombre_corto": "Nombre corto.",
+        "prd_descripcion": "Descripción detallada del producto.",
+        "prd_dias_siniestro": "Días previstos para gestión de siniestro.",
+        "prd_dias_renovacion": "Días para renovación.",
+        "prd_maximo_beneficiarios": "Máximo de beneficiarios permitidos.",
+        "prd_maximo_designados": "Máximo designados para póliza.",
+        "prd_tipo": "Tipo de producto.",
+        "prd_observaciones": "Observaciones adicionales.",
+        "prd_estado": "Estado (A=Activo, I=Inactivo).",
+        "prd_codusr_registra": "Usuario registrante.",
+        "prd_ip_registra": "IP.",
+        "prd_fecha_registra": "Fecha de registro.",
+        "ventana": "Referencia a interfaz.",
+        "ventana_sd": "Referencia a interfaz saldo deudor."
+      }
+    },
+    "pge_pro_promotores": {
+      "description": "Promotores o comercializadores que gestionan ventas para una sucursal de una IMF.",
+      "columns": {
+        "pro_codigo": "Identificador del promotor.",
+        "pro_codnis": "Código del país (por algún estándar).",
+        "pro_codsui": "Código de la sucursal.",
+        "pro_codpro_padre": "Promotor padre (estructura jerárquica).",
+        "pro_nombre": "Nombre del promotor.",
+        "pro_cargo": "Cargo o función.",
+        "pro_estado": "Estado (A=Activo, I=Inactivo).",
+        "pro_codusr_registra": "Usuario.",
+        "pro_ip_registra": "IP.",
+        "pro_fecha_registra": "Fecha registro.",
+        "ventana": "Referencia a interfaz.",
+        "codpro_padre": "Código del promotor superior."
+      }
+    },
+    "pge_prt_parentesco": {
+      "description": "Parentescos posibles entre beneficiario y asegurado.",
+      "columns": {
+        "prt_codigo": "Identificador de parentesco.",
+        "prt_codgen": "Género asociado.",
+        "prt_nombre": "Nombre del parentesco.",
+        "prt_codusr_registra": "Usuario.",
+        "prt_ip_registra": "IP.",
+        "prt_fecha_registra": "Fecha registro."
+      }
+    },
+    "pge_ram_ramas": {
+      "description": "Ramos o categorías de productos de seguros.",
+      "columns": {
+        "ram_codigo": "Identificador de ramo.",
+        "ram_nombre": "Nombre del ramo.",
+        "ram_codusr_registra": "Usuario.",
+        "ram_ip_registra": "IP.",
+        "ram_fecha_registra": "Fecha registro."
+      }
+    },
+    "pge_red_redes": {
+      "description": "Redes de microfinanzas.",
+      "columns": {
+        "red_codigo": "Identificador de red.",
+        "red_codtpr": "Tipo de red.",
+        "red_codpai": "Código de país.",
+        "red_nombre": "Nombre de la red.",
+        "red_estado": "Estado.",
+        "red_codusr_registra": "Usuario.",
+        "red_ip_registra": "IP.",
+        "red_fecha_registra": "Fecha registro."
+      }
+    },
+    "pge_sui_suc_imf": {
+      "description": "Sucursales de IMFs.",
+      "columns": {
+        "sui_codigo": "Identificador de la sucursal.",
+        "sui_codimf": "Código de la IMF propietaria.",
+        "sui_coddep": "Departamento.",
+        "sui_codmun": "Municipio.",
+        "sui_nombre": "Nombre de la sucursal.",
+        "sui_direccion": "Dirección completa.",
+        "sui_telefonos": "Teléfonos de contacto.",
+        "sui_contacto": "Nombre del contacto principal.",
+        "sui_estado": "Estado.",
+        "sui_codusr_registra": "Usuario que la registró.",
+        "sui_ip_registra": "IP.",
+        "sui_fecha_registra": "Fecha registro."
+      }
+    },
+    "pge_tdi_tipo_doc_id": {
+      "description": "Tipos de documentos de identidad reconocidos.",
+      "columns": {
+        "tdi_codigo": "Identificador del tipo de documento.",
+        "tdi_nombre": "Nombre completo del documento.",
+        "tdi_identificador": "Abreviatura.",
+        "tdi_codusr_registra": "Usuario registro.",
+        "tdi_ip_registra": "IP.",
+        "tdi_fecha_registra": "Fecha registro."
+      }
+    },
+    "seg_ben_beneficiarios": {
+      "description": "Beneficiarios y/o designados de cada póliza.",
+      "columns": {
+        "ben_codigo": "Identificador del beneficiario.",
+        "ben_codpol": "Código de la póliza (referencia a 'seg_pol_polizas').",
+        "ben_codadp": "Código del adendo, si aplica.",
+        "ben_codprt": "Código de parentesco.",
+        "ben_nombres": "Nombres del beneficiario.",
+        "ben_apellidos": "Apellidos.",
+        "ben_codtdi": "Tipo de documento (referencia a 'pge_tdi_tipo_doc_id').",
+        "ben_identificacion": "Documento de identidad.",
+        "ben_fecha_nacimiento": "Fecha de nacimiento.",
+        "ben_porcentaje": "Porcentaje asignado en la póliza.",
+        "ben_estado_civil": "Estado civil.",
+        "ben_profesion": "Profesión.",
+        "ben_nacionalidad": "Nacionalidad.",
+        "ben_tipo": "Tipo de beneficiario (B=Beneficiario, R=Designado).",
+        "ben_estado": "Estado (A/I).",
+        "ben_codusr_registra": "Usuario.",
+        "ben_ip_registra": "IP.",
+        "ben_fecha_registra": "Fecha registro."
+      }
+    },
+    "seg_cli_clientes": {
+      "description": "Clientes finales asegurados por las pólizas. Registro detallado de datos demográficos, laborales y familiares.",
+      "columns": {
+        "cli_codigo": "Identificador del cliente.",
+        "cli_codimf": "IMF a la que pertenece el cliente.",
+        "cli_codpai": "País de origen.",
+        "cli_coddep": "Departamento.",
+        "cli_codmun": "Municipio.",
+        "cli_codtdi": "Tipo de documento.",
+        "cli_codgen": "Sexo / Género.",
+        "cli_codetn": "Etnia.",
+        "cli_nombres": "Nombres.",
+        "cli_apellidos": "Apellidos.",
+        "cli_comarca": "Zona o comarca.",
+        "cli_numero_documento": "Identificación.",
+        "cli_fecha_nacimiento": "Fecha de nacimiento.",
+        "cli_estado_civil": "Estado civil.",
+        "cli_sector_rural": "Sector rural (S/N).",
+        "cli_numero_hijos": "Cantidad de hijos.",
+        "cli_numero_dependientes": "Cantidad de dependientes.",
+        "cli_escolaridad": "Nivel de escolaridad.",
+        "cli_ocupacion_primaria": "Ocupación principal.",
+        "cli_ocupacion_secundaria": "Ocupación secundaria.",
+        "cli_lugar_nacimiento": "Lugar de nacimiento.",
+        "cli_nacionalidad": "Nacionalidad principal.",
+        "cli_otra_nacionalidad": "Otra nacionalidad, si aplica.",
+        "cli_direccion": "Dirección principal.",
+        "cli_coddep_residencia": "Departamento de residencia.",
+        "cli_codmun_residencia": "Municipio de residencia.",
+        "cli_ciudad": "Ciudad.",
+        "cli_lab_empresa": "Empresa donde trabaja.",
+        "cli_lab_profesion": "Profesión laboral.",
+        "cli_lab_cargo": "Cargo laboral.",
+        "cli_lab_antiguedad": "Antigüedad laboral.",
+        "cli_lab_direccion": "Dirección de trabajo.",
+        "cli_lab_ciudad": "Ciudad de trabajo.",
+        "cli_lab_fuente": "Fuente laboral.",
+        "cli_con_nombre": "Nombre de contacto.",
+        "cli_con_nacionalidad": "Nacionalidad del contacto.",
+        "cli_con_codtdi": "Tipo de documento del contacto.",
+        "cli_con_numero_documento": "ID de contacto.",
+        "cli_codusr_registra": "Usuario registro.",
+        "cli_ip_registra": "IP.",
+        "cli_fecha_registra": "Fecha registro.",
+        "ventana*": "Ventanas asociadas a mantenimiento y pagos.",
+        "edad": "Edad estimada / calculada.",
+        "tel": "Teléfono de contacto."
+      }
+    },
+    "seg_pag_pagos": {
+      "description": "Pagos de pólizas por cuotas, registro de cobros y su estado.",
+      "columns": {
+        "pag_codigo": "Identificador del pago.",
+        "pag_codsui": "Sucursal que gestiona el pago.",
+        "pag_codpol": "Código de la póliza pagada (referencia a 'seg_pol_polizas').",
+        "pag_codsui_pago": "Sucursal donde se realizó el pago.",
+        "pag_referencia": "Referencia o recibo de pago.",
+        "pag_cuota": "Número de la cuota.",
+        "pag_fecha": "Fecha programada de pago.",
+        "pag_monto": "Monto programado.",
+        "pag_impuestos": "Monto de impuestos.",
+        "pag_fecha_pago": "Fecha real de pago.",
+        "pag_monto_pago": "Monto pagado.",
+        "pag_impuestos_pago": "Impuestos pagados.",
+        "pag_estado": "Estado del pago (P=Pagado, R=Pendiente/Reservado).",
+        "pag_comision": "Comisión sobre el pago.",
+        "pag_codusr_registra": "Usuario.",
+        "pag_ip_registra": "IP.",
+        "pag_fecha_registra": "Fecha registro.",
+        "fecha_pago": "Fecha pago como texto.",
+        "pag_codusr_update": "Usuario que actualizó.",
+        "pag_fecha_update": "Fecha de actualización."
+      }
+    },
+    "seg_pol_polizas": {
+      "description": "Pólizas individuales vendidas a los clientes, incluye todos los datos relevantes a la emisión y vigencia.",
+      "columns": {
+        "pol_codigo": "Identificador de la póliza.",
+        "pol_codpom": "Póliza maestra de IMF (referencia a 'seg_pom_polizas_maestras').",
+        "pol_codimf": "Código IMF.",
+        "pol_codsui": "Sucursal donde se vendió/emite.",
+        "pol_codcli": "Cliente asegurado.",
+        "pol_codasp": "Agente/Asesor responsable.",
+        "pol_codprd": "Producto.",
+        "pol_coddpr": "Plan (detalle producto).",
+        "pol_codpro": "Promotor responsable.",
+        "pol_tipo": "Tipo de póliza.",
+        "pol_fecha": "Fecha de registro.",
+        "pol_solicitud": "Solicitud asociada.",
+        "pol_certificado": "Número de certificado de póliza.",
+        "pol_certificado_original": "Certificado póliza original.",
+        "pol_fecha_inicio": "Inicio de vigencia.",
+        "pol_fecha_final": "Fin de vigencia.",
+        "pol_forma_pago": "Forma de pago.",
+        "pol_periodo": "Periodo (meses/años) de cobertura.",
+        "pol_numero_pagos": "Cantidad cuotas/pagos.",
+        "pol_monto": "Monto asegurado.",
+        "pol_prima": "Prima pagada.",
+        "pol_impuestos": "Impuestos generados.",
+        "pol_suma_asegurada": "Suma asegurada máxima.",
+        "pol_recargo": "Recargos adicionales.",
+        "pol_prima_mensual": "Valor de prima en pagos mensuales.",
+        "pol_observaciones": "Información adicional.",
+        "pol_seguros": "Seguro(s) asociados.",
+        "pol_estatura": "Estatura del asegurado.",
+        "pol_peso": "Peso del asegurado.",
+        "pol_codpol_origen": "Poliza origen (renovaciones).",
+        "pol_codcau_anulacion": "Causa de anulación.",
+        "pol_estado": "Estado (P=Pagada, N=No activa).",
+        "pol_codusr_registra": "Usuario registro.",
+        "pol_ip_registra": "IP.",
+        "pol_fecha_registra": "Fecha registro.",
+        "mes": "Nombre mes póliza.",
+        "fecha": "Fecha corta.",
+        "hoy": "Fecha de hoy (control de vigencia).",
+        "ventana*": "Ventanas/interfaz de acción sobre la póliza, como mantenimientos y adendas."
+      }
+    },
+    "seg_pom_polizas_maestras": {
+      "description": "Pólizas maestras que gestionan a nivel de IMF los productos y convenios globales.",
+      "columns": {
+        "pom_codigo": "Identificador de póliza maestra.",
+        "pom_codimf": "Código IMF.",
+        "pom_codprd": "Producto asegurado.",
+        "pom_poliza": "Código de póliza/convenio.",
+        "pom_fecha_ini": "Inicio de la vigencia.",
+        "pom_fecha_fin": "Fecha fin.",
+        "pom_tipo": "Tipo de póliza maestra.",
+        "pom_estado": "Estado (I/A).",
+        "pom_codusr_registra": "Usuario.",
+        "pom_ip_registra": "IP.",
+        "pom_fecha_registra": "Registro.",
+        "tipo": "Tipo adicional."
+      }
+    },
+    "seg_sin_siniestros": {
+      "description": "Siniestros registrados, cada evento de reclamo o accidente asociado a una póliza.",
+      "columns": {
+        "sin_codigo": "Identificador del siniestro.",
+        "sin_codpol": "Número de póliza afectada.",
+        "sin_codimf": "IMF relacionada.",
+        "sin_codsui": "Sucursal.",
+        "sin_codcau": "Causa del siniestro.",
+        "sin_codprt": "Parentesco involucrado.",
+        "sin_codsta": "Estado actual.",
+        "sin_fecha_siniestro": "Fecha de ocurrencia.",
+        "sin_dias_cobertura": "Días cubiertos.",
+        "sin_fecha_notificacion": "Fecha de aviso.",
+        "sin_referencia": "Referencia externa.",
+        "sin_nombres": "Nombre persona afectada.",
+        "sin_apellidos": "Apellidos del afectado.",
+        "sin_codtdi": "Tipo de documento.",
+        "sin_descripcion": "Descripción del siniestro.",
+        "sin_numero_documento": "ID afectado.",
+        "sin_email": "Email de contacto.",
+        "sin_celular": "Celular afectado.",
+        "sin_telefono": "Teléfono fijo.",
+        "sin_extension": "Extensión telefónica.",
+        "sin_direccion_residencia": "Domicilio afectado.",
+        "sin_codusr_registra": "Usuario.",
+        "sin_ip_registra": "IP.",
+        "sin_fecha_registra": "Registro.",
+        "mes": "Mes del reporte.",
+        "fecha": "Fecha texto.",
+        "ventana*": "Ventanas/UI para gestión y pago del siniestro."
+      }
+    },
+    "seg_stp_status_pol": {
+      "description": "Histórico de estados de una póliza (estatus de proceso).",
+      "columns": {
+        "stp_codigo": "Identificador del estado.",
+        "stp_codpol": "Código de la póliza.",
+        "stp_estado": "Estado (R=Registrado, otros).",
+        "stp_fecha_estado": "Fecha de cambio de estado.",
+        "stp_codusr_registra": "Usuario de cambio.",
+        "stp_ip_registra": "IP.",
+        "stp_fecha_registra": "Fecha de registro/cambio."
+      }
+    }
+  }
+}
