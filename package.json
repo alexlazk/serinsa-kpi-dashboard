@@ -8,8 +8,8 @@
     "dev": "node server.js"
   },
   "dependencies": {
-    "@cubejs-backend/server": "^0.33.52",
-    "@cubejs-backend/mssql-driver": "^0.33.52",
+    "@cubejs-backend/server": "^0.33.65",
+    "@cubejs-backend/mssql-driver": "^0.33.65",
     "dotenv": "^16.4.5"
   }
 }
