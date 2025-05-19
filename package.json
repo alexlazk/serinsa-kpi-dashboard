@@ -1,0 +1,15 @@
+{
+  "name": "serinsa-kpi-dashboard",
+  "version": "0.1.0",
+  "description": "Cube.js backend for Serinsa KPIs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "@cubejs-backend/server": "^0.33.52",
+    "@cubejs-backend/mssql-driver": "^0.33.52",
+    "dotenv": "^16.4.5"
+  }
+}
